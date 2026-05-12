@@ -67,35 +67,35 @@ public class TestLogiciel {
   
   }
 
-private void istqbtesteurAgilePage() {
-    
-	
-	action.moveToElement(driver.findElement(By.xpath("//span[@data-hover=\"ISTQB testeur agile\"]"))).click().perform();
-    
-    assertEquals("Évènements en mai 2026", driver.findElement(By.xpath("//*[@id=\"Subheader\"]/div/div/h1")).getText());
+  private void istqbtesteurAgilePage() {
+	    // 1. On définit une attente (Wait) de 15 secondes
+	    org.openqa.selenium.support.ui.WebDriverWait wait = new org.openqa.selenium.support.ui.WebDriverWait(driver, java.time.Duration.ofSeconds(15));
 
- System.out.println("test 1111");
- WebElement element1 = driver.findElement(By.xpath("//a[@href='https://www.expertunisie.com/index.php/demander-un-devis/']")
-		); 
-  element1.click();
-  WebElement Particulier = driver.findElement(By.xpath("//*[@id=\"wpcf7-f260-p179-o1\"]/form/p[2]/span/span/span[2]/input"));
-  Particulier.click();
-  
-  
-  
-  
-  
-  
-  
-  // COMMENTAIRE
+	    // 2. On attend que l'élément soit présent dans le code de la page
+	    org.openqa.selenium.WebElement agileBtn = wait.until(
+	        org.openqa.selenium.support.ui.ExpectedConditions.presenceOfElementLocated(By.xpath("//span[@data-hover='ISTQB testeur agile']"))
+	    );
 
+	    // 3. On clique avec JavaScript (c'est plus sûr pour la CI que le moveToElement)
+	    js.executeScript("arguments[0].click();", agileBtn);
 
-  
-  
-  
-  
-  
-}
+	    // 4. On vérifie le titre (ton code original)
+	    assertEquals("Évènements en mai 2026", driver.findElement(By.xpath("//*[@id='Subheader']/div/div/h1")).getText());
+
+	    System.out.println("test 1111");
+
+	    // 5. On attend aussi que le bouton Devis soit cliquable
+	    org.openqa.selenium.WebElement element1 = wait.until(
+	        org.openqa.selenium.support.ui.ExpectedConditions.elementToBeClickable(By.xpath("//a[@href='https://www.expertunisie.com/index.php/demander-un-devis/']"))
+	    );
+	    element1.click();
+
+	    // 6. On clique sur Particulier
+	    org.openqa.selenium.WebElement Particulier = wait.until(
+	        org.openqa.selenium.support.ui.ExpectedConditions.elementToBeClickable(By.xpath("//*[@id='wpcf7-f260-p179-o1']/form/p[2]/span/span/span[2]/input"))
+	    );
+	    Particulier.click();
+	}
 
 private void istqbgenerativeIAPage() {
 	{
