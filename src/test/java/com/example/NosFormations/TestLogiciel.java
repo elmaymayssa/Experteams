@@ -87,6 +87,15 @@ public class TestLogiciel {
         js.executeScript("arguments[0].click();", particulier);
     }
 
+private void istqbgenerativeIAPage() {
+    WebElement genIATab = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[@data-hover='ISTQB générative IA']")));
+    js.executeScript("arguments[0].click();", genIATab);
+    
+    WebElement mainTitle = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//h1[@class='title']")));
+    assertEquals("ISTQB Generative IA Testing", mainTitle.getText());
+
+  
+}
 
     private void verifyTitreFormation() {
         List<WebElement> titles = wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath("//div[@class='image'][1]/following::h4[1]")));
