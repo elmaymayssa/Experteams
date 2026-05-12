@@ -57,7 +57,7 @@ public class TestLogiciel {
 	  istqbtesteurAgilePage();
 
   
-  
+  // add comment to check CI workflow
   }
 
 private void istqbtesteurAgilePage() {
