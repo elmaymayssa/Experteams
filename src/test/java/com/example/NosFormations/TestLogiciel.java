@@ -74,6 +74,13 @@ private void istqbtesteurAgilePage() {
   WebElement Particulier = driver.findElement(By.xpath("//*[@id=\"wpcf7-f260-p179-o1\"]/form/p[2]/span/span/span[2]/input"));
   Particulier.click();
   
+  
+  
+  
+  
+  
+  
+  // COMMENTAIRE
 
 
   
