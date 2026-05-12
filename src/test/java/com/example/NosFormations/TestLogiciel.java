@@ -87,33 +87,6 @@ public class TestLogiciel {
         js.executeScript("arguments[0].click();", particulier);
     }
 
-private void istqbgenerativeIAPage() {
-    WebElement genIATab = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[@data-hover='ISTQB générative IA']")));
-    js.executeScript("arguments[0].click();", genIATab);
-    
-    WebElement mainTitle = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//h1[@class='title']")));
-    assertEquals("ISTQB Generative IA Testing", mainTitle.getText());
-
-    // Utilisation d'un sélecteur plus stable pour les questions
-    List<WebElement> elements = wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath("//div[contains(@class,'question')]")));
-    
-    // --- CORRECTION LIGNE 101 ---
-    js.executeScript("arguments[0].click();", elements.get(0));
-    
-    // Au lieu de 'visibilityOfElementLocated', on utilise 'presenceOfElementLocated' 
-    // et un XPath qui ne dépend pas de la classe "active"
-    WebElement reponse1 = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[contains(@class,'question')]//p")));
-    assertTrue(!reponse1.getText().isEmpty());    
-    // Utilisation de .trim() pour éviter les erreurs d'espaces masqués
-    assertEquals("Objectifs", elements.get(0).findElement(By.cssSelector("div h2")).getText().trim());
-
-    // --- CORRECTION DES AUTRES SECTIONS ---
-    js.executeScript("arguments[0].click();", elements.get(1));
-    assertEquals("Prérequis", elements.get(1).findElement(By.cssSelector("div h2")).getText().trim());
-
-    js.executeScript("arguments[0].click();", elements.get(2));
-    assertEquals("Certification", elements.get(2).findElement(By.cssSelector("div h2")).getText().trim());
-}
 
     private void verifyTitreFormation() {
         List<WebElement> titles = wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath("//div[@class='image'][1]/following::h4[1]")));
