@@ -2,9 +2,14 @@ name: Selenium CI
 
 on:
   push:
-    branches: [ "main" ]
+    branches:
+      - main
+      - feature/ci-fix
   pull_request:
-    branches: [ "main" ]
+    branches:
+      - main
+      - feature/ci-fix
+  workflow_dispatch: # Permet de lancer le test manuellement via l'onglet Actions
 
 jobs:
   test:
@@ -17,8 +22,9 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@v4
         with:
-          distribution: temurin
-          java-version: 17
+          distribution: 'temurin'
+          java-version: '17'
+          cache: 'maven' # Optionnel: accélère les prochains tests
 
       - name: Run tests
         run: mvn clean test
