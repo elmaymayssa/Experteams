@@ -68,6 +68,8 @@ private void istqbtesteurAgilePage() {
     assertEquals("Évènements en mai 2026", driver.findElement(By.xpath("//*[@id=\"Subheader\"]/div/div/h1")).getText());
 
  System.out.println("test 1111");
+ System.out.println("test 222");
+
  WebElement element1 = driver.findElement(By.xpath("//a[@href='https://www.expertunisie.com/index.php/demander-un-devis/']")
 		); 
   element1.click();
