@@ -32,16 +32,23 @@ public class TestLogiciel {
   JavascriptExecutor js;
   @Before
   public void setUp() throws Exception {
-	  WebDriverManager.chromedriver().setup();
-	  
-	  ChromeOptions options = new ChromeOptions();
-		options.addArguments("start-maximized");
-		options.addArguments("--remote-allow-origins=*");
-		driver = new ChromeDriver(options);
-		 action = new Actions(driver);  
-    baseUrl = "https://www.expertunisie.com/nos-formations/test-logiciels/";
-    driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
-    js = (JavascriptExecutor) driver;
+      WebDriverManager.chromedriver().setup();
+      
+      ChromeOptions options = new ChromeOptions();
+      
+      // On force le mode Headless pour TOUT (Local et CI) pour tester
+      options.addArguments("--headless=new");
+      options.addArguments("--no-sandbox");
+      options.addArguments("--disable-dev-shm-usage");
+      options.addArguments("--window-size=1920,1080");
+      options.addArguments("--remote-allow-origins=*");
+      
+      driver = new ChromeDriver(options);
+      action = new Actions(driver);  
+      
+      baseUrl = "https://www.expertunisie.com/nos-formations/test-logiciels/";
+      driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+      js = (JavascriptExecutor) driver;
   }
 
   @Test
@@ -57,7 +64,7 @@ public class TestLogiciel {
 	  istqbtesteurAgilePage();
 
   
-  // add comment to check CI workflow
+  
   }
 
 private void istqbtesteurAgilePage() {
@@ -68,8 +75,6 @@ private void istqbtesteurAgilePage() {
     assertEquals("Évènements en mai 2026", driver.findElement(By.xpath("//*[@id=\"Subheader\"]/div/div/h1")).getText());
 
  System.out.println("test 1111");
- System.out.println("test 222");
-
  WebElement element1 = driver.findElement(By.xpath("//a[@href='https://www.expertunisie.com/index.php/demander-un-devis/']")
 		); 
   element1.click();
